@@ -7,17 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5204FCE71FBBB6C000A3F70F /* CategoryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5204FCE61FBBB6C000A3F70F /* CategoryCollectionViewController.swift */; };
+		5204FCE91FBBB70600A3F70F /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5204FCE81FBBB70600A3F70F /* Category.swift */; };
+		5204FCEB1FBBBCE600A3F70F /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5204FCEA1FBBBCE600A3F70F /* CategoryCollectionViewCell.swift */; };
+		5204FCEF1FBBC8A000A3F70F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5204FCEE1FBBC89F00A3F70F /* Assets.xcassets */; };
 		52371E4C1FAD0E16006C6910 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52371E4B1FAD0E16006C6910 /* TestData.swift */; };
 		527DAC551FA4BB1600B69DE7 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 527DAC531FA4BB1600B69DE7 /* Map.storyboard */; };
 		527DAC5A1FA4BB3B00B69DE7 /* Favorites.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 527DAC581FA4BB3B00B69DE7 /* Favorites.storyboard */; };
 		527DAC5D1FA4BBDD00B69DE7 /* Category.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 527DAC5B1FA4BBDC00B69DE7 /* Category.storyboard */; };
+		52814BDD1FCB19C50023DAED /* CorePlace+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52814BDB1FCB19C50023DAED /* CorePlace+CoreDataClass.swift */; };
+		52814BDE1FCB19C50023DAED /* CorePlace+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52814BDC1FCB19C50023DAED /* CorePlace+CoreDataProperties.swift */; };
+		52CC711C1FC8F2F800622428 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CC711B1FC8F2F800622428 /* MapViewController.swift */; };
+		52CC71401FC92B3F00622428 /* CoinMap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 52CC713E1FC92B3F00622428 /* CoinMap.xcdatamodeld */; };
+		52CC71461FC9EDD300622428 /* DataManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CC71451FC9EDD300622428 /* DataManagerProtocol.swift */; };
+		52CC71491FC9F1EC00622428 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CC71481FC9F1EC00622428 /* CoreDataManager.swift */; };
 		52F342BC1FAC8E940084DF53 /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F342BB1FAC8E940084DF53 /* FavoriteTableViewCell.swift */; };
 		52F342BF1FAC9BD80084DF53 /* FavoriteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F342BE1FAC9BD80084DF53 /* FavoriteTableViewController.swift */; };
 		52F342C31FAC9D3B0084DF53 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F342C21FAC9D3B0084DF53 /* Place.swift */; };
 		749EA7251FA0EDA200A75D4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749EA7241FA0EDA200A75D4C /* AppDelegate.swift */; };
 		749EA7271FA0EDA200A75D4C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749EA7261FA0EDA200A75D4C /* ViewController.swift */; };
 		749EA72A1FA0EDA200A75D4C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 749EA7281FA0EDA200A75D4C /* Main.storyboard */; };
-		749EA72C1FA0EDA200A75D4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 749EA72B1FA0EDA200A75D4C /* Assets.xcassets */; };
 		749EA72F1FA0EDA200A75D4C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 749EA72D1FA0EDA200A75D4C /* LaunchScreen.storyboard */; };
 		749EA73A1FA0EDA200A75D4C /* CoinMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749EA7391FA0EDA200A75D4C /* CoinMapTests.swift */; };
 /* End PBXBuildFile section */
@@ -33,10 +42,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5204FCE61FBBB6C000A3F70F /* CategoryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewController.swift; sourceTree = "<group>"; };
+		5204FCE81FBBB70600A3F70F /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		5204FCEA1FBBBCE600A3F70F /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		5204FCEE1FBBC89F00A3F70F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		52371E4B1FAD0E16006C6910 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		527DAC541FA4BB1600B69DE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = CoinMap/Base.lproj/Map.storyboard; sourceTree = "<group>"; };
 		527DAC591FA4BB3B00B69DE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = CoinMap/Base.lproj/Favorites.storyboard; sourceTree = "<group>"; };
 		527DAC5C1FA4BBDC00B69DE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = CoinMap/Base.lproj/Category.storyboard; sourceTree = "<group>"; };
+		52814BDB1FCB19C50023DAED /* CorePlace+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CorePlace+CoreDataClass.swift"; sourceTree = "<group>"; };
+		52814BDC1FCB19C50023DAED /* CorePlace+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CorePlace+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		52CC711B1FC8F2F800622428 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		52CC713F1FC92B3F00622428 /* CoinMap.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoinMap.xcdatamodel; sourceTree = "<group>"; };
+		52CC71451FC9EDD300622428 /* DataManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerProtocol.swift; sourceTree = "<group>"; };
+		52CC71481FC9F1EC00622428 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		52F342BB1FAC8E940084DF53 /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
 		52F342BE1FAC9BD80084DF53 /* FavoriteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewController.swift; sourceTree = "<group>"; };
 		52F342C21FAC9D3B0084DF53 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
@@ -44,7 +63,6 @@
 		749EA7241FA0EDA200A75D4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		749EA7261FA0EDA200A75D4C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		749EA7291FA0EDA200A75D4C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		749EA72B1FA0EDA200A75D4C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		749EA72E1FA0EDA200A75D4C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		749EA7301FA0EDA200A75D4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		749EA7351FA0EDA200A75D4C /* CoinMapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoinMapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,10 +96,30 @@
 			path = utils;
 			sourceTree = "<group>";
 		};
+		52CC71411FC9D61200622428 /* core */ = {
+			isa = PBXGroup;
+			children = (
+				52814BDB1FCB19C50023DAED /* CorePlace+CoreDataClass.swift */,
+				52814BDC1FCB19C50023DAED /* CorePlace+CoreDataProperties.swift */,
+			);
+			path = core;
+			sourceTree = "<group>";
+		};
+		52CC71441FC9EDB600622428 /* manager */ = {
+			isa = PBXGroup;
+			children = (
+				52CC71481FC9F1EC00622428 /* CoreDataManager.swift */,
+				52CC71451FC9EDD300622428 /* DataManagerProtocol.swift */,
+			);
+			path = manager;
+			sourceTree = "<group>";
+		};
 		52F342BD1FAC9B9D0084DF53 /* controller */ = {
 			isa = PBXGroup;
 			children = (
 				52F342BE1FAC9BD80084DF53 /* FavoriteTableViewController.swift */,
+				5204FCE61FBBB6C000A3F70F /* CategoryCollectionViewController.swift */,
+				52CC711B1FC8F2F800622428 /* MapViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -90,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				52F342BB1FAC8E940084DF53 /* FavoriteTableViewCell.swift */,
+				5204FCEA1FBBBCE600A3F70F /* CategoryCollectionViewCell.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -97,7 +136,9 @@
 		52F342C11FAC9CF90084DF53 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				52CC71411FC9D61200622428 /* core */,
 				52F342C21FAC9D3B0084DF53 /* Place.swift */,
+				5204FCE81FBBB70600A3F70F /* Category.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -105,6 +146,7 @@
 		749EA7181FA0EDA200A75D4C = {
 			isa = PBXGroup;
 			children = (
+				52CC713E1FC92B3F00622428 /* CoinMap.xcdatamodeld */,
 				527DAC5B1FA4BBDC00B69DE7 /* Category.storyboard */,
 				527DAC581FA4BB3B00B69DE7 /* Favorites.storyboard */,
 				527DAC531FA4BB1600B69DE7 /* Map.storyboard */,
@@ -126,6 +168,8 @@
 		749EA7231FA0EDA200A75D4C /* CoinMap */ = {
 			isa = PBXGroup;
 			children = (
+				52CC71441FC9EDB600622428 /* manager */,
+				5204FCEE1FBBC89F00A3F70F /* Assets.xcassets */,
 				52371E4A1FAD0E02006C6910 /* utils */,
 				52F342C11FAC9CF90084DF53 /* model */,
 				52F342C01FAC9BEE0084DF53 /* view */,
@@ -133,7 +177,6 @@
 				749EA7241FA0EDA200A75D4C /* AppDelegate.swift */,
 				749EA7261FA0EDA200A75D4C /* ViewController.swift */,
 				749EA7281FA0EDA200A75D4C /* Main.storyboard */,
-				749EA72B1FA0EDA200A75D4C /* Assets.xcassets */,
 				749EA72D1FA0EDA200A75D4C /* LaunchScreen.storyboard */,
 				749EA7301FA0EDA200A75D4C /* Info.plist */,
 			);
@@ -235,8 +278,8 @@
 				749EA72F1FA0EDA200A75D4C /* LaunchScreen.storyboard in Resources */,
 				527DAC5A1FA4BB3B00B69DE7 /* Favorites.storyboard in Resources */,
 				527DAC5D1FA4BBDD00B69DE7 /* Category.storyboard in Resources */,
-				749EA72C1FA0EDA200A75D4C /* Assets.xcassets in Resources */,
 				749EA72A1FA0EDA200A75D4C /* Main.storyboard in Resources */,
+				5204FCEF1FBBC8A000A3F70F /* Assets.xcassets in Resources */,
 				527DAC551FA4BB1600B69DE7 /* Map.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,9 +301,18 @@
 				749EA7271FA0EDA200A75D4C /* ViewController.swift in Sources */,
 				52F342BF1FAC9BD80084DF53 /* FavoriteTableViewController.swift in Sources */,
 				52F342BC1FAC8E940084DF53 /* FavoriteTableViewCell.swift in Sources */,
+				52CC711C1FC8F2F800622428 /* MapViewController.swift in Sources */,
 				52371E4C1FAD0E16006C6910 /* TestData.swift in Sources */,
+				5204FCEB1FBBBCE600A3F70F /* CategoryCollectionViewCell.swift in Sources */,
 				749EA7251FA0EDA200A75D4C /* AppDelegate.swift in Sources */,
+				52CC71401FC92B3F00622428 /* CoinMap.xcdatamodeld in Sources */,
+				52814BDE1FCB19C50023DAED /* CorePlace+CoreDataProperties.swift in Sources */,
 				52F342C31FAC9D3B0084DF53 /* Place.swift in Sources */,
+				52CC71461FC9EDD300622428 /* DataManagerProtocol.swift in Sources */,
+				52814BDD1FCB19C50023DAED /* CorePlace+CoreDataClass.swift in Sources */,
+				5204FCE71FBBB6C000A3F70F /* CategoryCollectionViewController.swift in Sources */,
+				52CC71491FC9F1EC00622428 /* CoreDataManager.swift in Sources */,
+				5204FCE91FBBB70600A3F70F /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,6 +576,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		52CC713E1FC92B3F00622428 /* CoinMap.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				52CC713F1FC92B3F00622428 /* CoinMap.xcdatamodel */,
+			);
+			currentVersion = 52CC713F1FC92B3F00622428 /* CoinMap.xcdatamodel */;
+			path = CoinMap.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 749EA7191FA0EDA200A75D4C /* Project object */;
 }
