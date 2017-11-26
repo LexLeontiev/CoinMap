@@ -10,13 +10,22 @@ import UIKit
 
 class Place {
     
+    let id: Int
     let placeName: String
     let categoryName: String?
-    let description: String?
+    let desc: String?
     
-    init(placeName: String, categoryName: String?, description: String?) {
+    init(id: Int, placeName: String, categoryName: String?, desc: String?) {
+        self.id = id
         self.placeName = placeName
         self.categoryName = categoryName
-        self.description = description
+        self.desc = desc
+    }
+    
+    init(corePlace: CorePlace) {
+        self.id = Int(corePlace.placeId)
+        self.placeName = corePlace.placeName ?? ""
+        self.categoryName = corePlace.categoryName ?? ""
+        self.desc = corePlace.desc ?? ""
     }
 }
