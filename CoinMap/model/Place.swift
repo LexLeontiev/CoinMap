@@ -14,12 +14,26 @@ class Place {
     let placeName: String
     let categoryName: String?
     let desc: String?
+    let lat: Double
+    let lon: Double
+    
+    // constructor for places with coodinats and without description
+    init(id: Int, placeName: String, categoryName: String?, lat: Double, lon: Double) {
+        self.id = id
+        self.placeName = placeName
+        self.categoryName = categoryName
+        self.desc = ""
+        self.lat = lat
+        self.lon = lon
+    }
     
     init(id: Int, placeName: String, categoryName: String?, desc: String?) {
         self.id = id
         self.placeName = placeName
         self.categoryName = categoryName
         self.desc = desc
+        self.lat = 0.0
+        self.lon = 0.0
     }
     
     init(corePlace: CorePlace) {
@@ -27,5 +41,7 @@ class Place {
         self.placeName = corePlace.placeName ?? ""
         self.categoryName = corePlace.categoryName ?? ""
         self.desc = corePlace.desc ?? ""
+        self.lat = 0.0
+        self.lon = 0.0
     }
 }
