@@ -11,8 +11,9 @@ import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate {
     
-    var places: Array<Place> = Array()
     typealias JSONDictionary = [String: Any]
+    
+    var places: Array<Place> = Array()
     let defaultSession = URLSession(configuration: .default)
     var dataTask: URLSessionDataTask?
     
@@ -22,8 +23,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         
         mapView.delegate = self
-        
-        showCentredMap()
         
         performRequest()
     }
@@ -51,7 +50,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func deliverResult(data: Data) {
-        print("result delivered")
         parsePlaces(data: data)
     }
     
@@ -79,13 +77,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 places.append(Place(id: id!, placeName: name!, categoryName: cat!, lat: lat!, lon: lon!))
                 index += 1
             } else {
-                print("Problem parsing trackDictionary\n")
+                print("Problem parsing venues\n")
             }
         }
         addPlacesToMap()
     }
     
     func addPlacesToMap() {
+        var placeAnnotations = Array<MKPointAnnotation>()
         for place in places {
             let sourceLocation = CLLocationCoordinate2D(latitude: place.lat, longitude: place.lon)
             let sourcePlacemark = MKPlacemark(coordinate: sourceLocation, addressDictionary: nil)
@@ -94,8 +93,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             if let location = sourcePlacemark.location {
                 sourceAnnotation.coordinate = location.coordinate
             }
-            self.mapView.showAnnotations([sourceAnnotation], animated: true )
+            placeAnnotations.append(sourceAnnotation)
         }
+        self.mapView.showAnnotations(placeAnnotations, animated: true )
         showCentredMap()
     }
     
