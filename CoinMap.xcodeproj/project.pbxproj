@@ -24,6 +24,8 @@
 		52F342BC1FAC8E940084DF53 /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F342BB1FAC8E940084DF53 /* FavoriteTableViewCell.swift */; };
 		52F342BF1FAC9BD80084DF53 /* FavoriteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F342BE1FAC9BD80084DF53 /* FavoriteTableViewController.swift */; };
 		52F342C31FAC9D3B0084DF53 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F342C21FAC9D3B0084DF53 /* Place.swift */; };
+		52F606D41FDC340F00F3DD1B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F606D31FDC340F00F3DD1B /* LocationManager.swift */; };
+		52F606D71FDC409B00F3DD1B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52F606D61FDC407B00F3DD1B /* CoreLocation.framework */; };
 		749EA7251FA0EDA200A75D4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749EA7241FA0EDA200A75D4C /* AppDelegate.swift */; };
 		749EA7271FA0EDA200A75D4C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749EA7261FA0EDA200A75D4C /* ViewController.swift */; };
 		749EA72A1FA0EDA200A75D4C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 749EA7281FA0EDA200A75D4C /* Main.storyboard */; };
@@ -59,6 +61,8 @@
 		52F342BB1FAC8E940084DF53 /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
 		52F342BE1FAC9BD80084DF53 /* FavoriteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewController.swift; sourceTree = "<group>"; };
 		52F342C21FAC9D3B0084DF53 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		52F606D31FDC340F00F3DD1B /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		52F606D61FDC407B00F3DD1B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		749EA7211FA0EDA200A75D4C /* CoinMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		749EA7241FA0EDA200A75D4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		749EA7261FA0EDA200A75D4C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52F606D71FDC409B00F3DD1B /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +115,7 @@
 			children = (
 				52CC71481FC9F1EC00622428 /* CoreDataManager.swift */,
 				52CC71451FC9EDD300622428 /* DataManagerProtocol.swift */,
+				52F606D31FDC340F00F3DD1B /* LocationManager.swift */,
 			);
 			path = manager;
 			sourceTree = "<group>";
@@ -143,6 +149,14 @@
 			path = model;
 			sourceTree = "<group>";
 		};
+		52F606D51FDC407B00F3DD1B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				52F606D61FDC407B00F3DD1B /* CoreLocation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		749EA7181FA0EDA200A75D4C = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +167,7 @@
 				749EA7231FA0EDA200A75D4C /* CoinMap */,
 				749EA7381FA0EDA200A75D4C /* CoinMapTests */,
 				749EA7221FA0EDA200A75D4C /* Products */,
+				52F606D51FDC407B00F3DD1B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -302,6 +317,7 @@
 				52F342BF1FAC9BD80084DF53 /* FavoriteTableViewController.swift in Sources */,
 				52F342BC1FAC8E940084DF53 /* FavoriteTableViewCell.swift in Sources */,
 				52CC711C1FC8F2F800622428 /* MapViewController.swift in Sources */,
+				52F606D41FDC340F00F3DD1B /* LocationManager.swift in Sources */,
 				52371E4C1FAD0E16006C6910 /* TestData.swift in Sources */,
 				5204FCEB1FBBBCE600A3F70F /* CategoryCollectionViewCell.swift in Sources */,
 				749EA7251FA0EDA200A75D4C /* AppDelegate.swift in Sources */,
@@ -490,7 +506,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D264RCU7GT;
 				INFOPLIST_FILE = CoinMap/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.CoinMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -504,7 +522,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D264RCU7GT;
 				INFOPLIST_FILE = CoinMap/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.CoinMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -8,10 +8,12 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
-class MapViewController: UIViewController, MKMapViewDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     typealias JSONDictionary = [String: Any]
+    let locationManager = LocationManager()
     
     var places: Array<Place> = Array()
     let defaultSession = URLSession(configuration: .default)
@@ -25,6 +27,27 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         mapView.delegate = self
         
         performRequest()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        locationManager.bindManager(self)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        locationManager.unbindManager()
+    }
+    
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("update location")
+        let location: CLLocationCoordinate2D = locationManager.getLastUpdatedLocation(locations)
+        let span: MKCoordinateSpan = MKCoordinateSpanMake(0.1, 0.1);
+        let region: MKCoordinateRegion = MKCoordinateRegionMake(location, span)
+        mapView.setRegion(region, animated: true)
+        mapView.showsUserLocation = true
+        locationManager.stopListeningLocationChanges()
     }
     
     func performRequest() {
@@ -83,6 +106,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         addPlacesToMap()
     }
     
+    @IBAction func goToCurrentLocation(_ sender: Any) {
+        locationManager.startListeningLocationChanges()
+    }
+    
     func addPlacesToMap() {
         var placeAnnotations = Array<MKPointAnnotation>()
         for place in places {
@@ -98,7 +125,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         self.mapView.showAnnotations(placeAnnotations, animated: true )
         showCentredMap()
     }
-    
+
     func showCentredMap() {
         let sourceLocation = CLLocationCoordinate2D(latitude: 55.752559, longitude: 37.617421)
         let viewRegion = MKCoordinateRegionMakeWithDistance(sourceLocation, 8000, 8000)

@@ -30,7 +30,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Skw-fd-kbT"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Map" id="GOk-yp-Ten"/>
+                    <navigationItem key="navigationItem" title="Map" id="GOk-yp-Ten">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="icons8-target-96" id="ciw-ou-HWL">
+                            <connections>
+                                <action selector="goToCurrentLocation:" destination="g0M-V8-GNp" id="CPM-sx-PU7"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="N3u-gZ-JJf" id="MCC-cc-ULJ"/>
                     </connections>
@@ -62,6 +68,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icons8-target-96" width="32" height="32"/>
         <image name="icons8-маркер-на-карте" width="33" height="33"/>
     </resources>
 </document>
