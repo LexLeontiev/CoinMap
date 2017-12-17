@@ -25,8 +25,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         super.viewDidLoad()
         
         mapView.delegate = self
-        
-        performRequest()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,20 +39,41 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        locationManager.stopListeningLocationChanges()
         print("update location")
         let location: CLLocationCoordinate2D = locationManager.getLastUpdatedLocation(locations)
         let span: MKCoordinateSpan = MKCoordinateSpanMake(0.1, 0.1);
         let region: MKCoordinateRegion = MKCoordinateRegionMake(location, span)
+        checkPlacesInThatRegion(region: region);
         mapView.setRegion(region, animated: true)
         mapView.showsUserLocation = true
-        locationManager.stopListeningLocationChanges()
     }
     
-    func performRequest() {
+    func checkPlacesInThatRegion(region: MKCoordinateRegion) {
+        let span: MKCoordinateSpan = region.span
+        let center: CLLocationCoordinate2D = region.center
+        
+        let minimumLatitude = center.latitude - span.latitudeDelta * 0.5
+        let maximumLatitude = center.latitude + span.latitudeDelta * 0.5
+        let minimumLongitude = center.longitude - span.longitudeDelta * 0.5
+        let maximumLongitude = center.longitude + span.longitudeDelta * 0.5
+        
+        print("minimumLatitude = \(minimumLatitude)")
+        print("maximumLatitude = \(maximumLatitude)")
+        print("minimumLongitude = \(minimumLongitude)")
+        print("maximumLongitude = \(maximumLongitude)")
+
+        
+        loadPlacesInRegion(minimumLatitude: minimumLatitude, maximumLatitude: maximumLatitude,
+                           minimumLongitude: minimumLongitude, maximumLongitude: maximumLongitude)
+    }
+    
+    func loadPlacesInRegion(minimumLatitude lat1: Double, maximumLatitude lat2: Double,
+                            minimumLongitude lon1: Double, maximumLongitude lon2: Double) {
         dataTask?.cancel()
         places.removeAll()
         if var urlComponents = URLComponents(string: "https://coinmap.org/api/v1/venues/") {
-            urlComponents.query = "limit=10&lat1=55.712559&lat2=55.792559&lon1=37.577421&lon2=37.657421"
+            urlComponents.query = "limit=10&lat1=\(lat1)&lat2=\(lat2)&lon1=\(lon1)&lon2=\(lon2)"
             guard let url = urlComponents.url else { return }
             dataTask = defaultSession.dataTask(with: url) { data, response, error in
                 defer { self.dataTask = nil }
@@ -70,6 +89,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             }
             dataTask?.resume()
         }
+    }
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        print("regionDidChange")
+        checkPlacesInThatRegion(region: mapView.region)
     }
     
     func deliverResult(data: Data) {
@@ -122,8 +146,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             }
             placeAnnotations.append(sourceAnnotation)
         }
-        self.mapView.showAnnotations(placeAnnotations, animated: true )
-        showCentredMap()
+        self.mapView.addAnnotations(placeAnnotations)
     }
 
     func showCentredMap() {
