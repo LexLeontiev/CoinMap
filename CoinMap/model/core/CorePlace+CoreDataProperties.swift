@@ -18,8 +18,15 @@ extension CorePlace {
     }
 
     @NSManaged public var placeId: Int64
+    @NSManaged public var lat: Double
+    @NSManaged public var lon: Double
     @NSManaged public var placeName: String?
     @NSManaged public var categoryName: String?
     @NSManaged public var desc: String?
+    @NSManaged public var country: String?
+    @NSManaged public var address: String?
+    @NSManaged public var website: String?
+
+    
 
 }

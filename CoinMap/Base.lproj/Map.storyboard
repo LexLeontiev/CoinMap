@@ -73,13 +73,13 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ijZ-WO-A6f">
                                     <rect key="frame" x="0.0" y="267" width="375" height="400"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="city" translatesAutoresizingMaskIntoConstraints="NO" id="INs-an-0zF">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="INs-an-0zF">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="130" id="vFi-3v-Otb"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Place number 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T1b-4R-x9G">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" - " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T1b-4R-x9G">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
@@ -94,7 +94,7 @@
                                                 <constraint firstAttribute="height" constant="24" id="xgW-dQ-hSR"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kgu-yX-BOe">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" - " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kgu-yX-BOe">
                                             <rect key="frame" x="54" y="146" width="313" height="24"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -105,7 +105,7 @@
                                             <rect key="frame" x="16" y="186" width="24" height="24"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9og-sZ-5NJ">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" - " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9og-sZ-5NJ">
                                             <rect key="frame" x="54" y="186" width="313" height="24"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -116,7 +116,7 @@
                                             <rect key="frame" x="16" y="226" width="24" height="24"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HgA-cZ-4uu">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" - " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HgA-cZ-4uu">
                                             <rect key="frame" x="54" y="226" width="313" height="24"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -127,13 +127,38 @@
                                             <rect key="frame" x="16" y="266" width="24" height="24"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OOw-Ro-WkE">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" - " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OOw-Ro-WkE">
                                             <rect key="frame" x="54" y="266" width="313" height="24"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icons8-info-100" translatesAutoresizingMaskIntoConstraints="NO" id="jiy-VU-cP2">
+                                            <rect key="frame" x="16" y="306" width="24" height="24"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" - " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HxQ-4w-33s">
+                                            <rect key="frame" x="54" y="306" width="313" height="24"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rMz-NS-l9R">
+                                            <rect key="frame" x="319" y="8" width="48" height="48"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="48" id="hfe-gm-YFx"/>
+                                                <constraint firstAttribute="height" constant="48" id="sfH-QR-iA6"/>
+                                            </constraints>
+                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <state key="normal" image="icons8-star-white-100">
+                                                <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="setIsFavorite:" destination="Gkv-k9-rls" eventType="touchUpInside" id="ySB-le-VEV"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -144,6 +169,8 @@
                                         <constraint firstItem="EXi-Mc-PCe" firstAttribute="leading" secondItem="ijZ-WO-A6f" secondAttribute="leading" constant="16" id="FbQ-Wo-Iam"/>
                                         <constraint firstItem="INs-an-0zF" firstAttribute="top" secondItem="ijZ-WO-A6f" secondAttribute="top" id="bRf-1p-jz5"/>
                                         <constraint firstAttribute="trailing" secondItem="INs-an-0zF" secondAttribute="trailing" id="cf1-Bf-mfD"/>
+                                        <constraint firstAttribute="trailing" secondItem="rMz-NS-l9R" secondAttribute="trailing" constant="8" id="gKe-Hw-xzS"/>
+                                        <constraint firstItem="rMz-NS-l9R" firstAttribute="top" secondItem="ijZ-WO-A6f" secondAttribute="top" constant="8" id="ush-Fa-NDG"/>
                                     </constraints>
                                 </view>
                             </subviews>
@@ -155,14 +182,15 @@
                         </view>
                         <blurEffect style="light"/>
                     </visualEffectView>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="addressIcon" destination="qCG-MV-gOH" id="erp-JD-P0T"/>
                         <outlet property="addressText" destination="9og-sZ-5NJ" id="Kzf-Pr-gb2"/>
-                        <outlet property="catIcon" destination="EXi-Mc-PCe" id="Ys0-Un-Mn4"/>
                         <outlet property="catText" destination="Kgu-yX-BOe" id="SJ4-sF-h3m"/>
-                        <outlet property="descIcon" destination="lrM-QZ-rLF" id="qwc-6w-8wh"/>
-                        <outlet property="descText" destination="HgA-cZ-4uu" id="XcW-3c-PHt"/>
+                        <outlet property="countryText" destination="HgA-cZ-4uu" id="XFq-aK-9OA"/>
+                        <outlet property="descText" destination="HxQ-4w-33s" id="9nr-Ro-Qvt"/>
+                        <outlet property="favoriteBtn" destination="rMz-NS-l9R" id="cDZ-o0-bB8"/>
                         <outlet property="placeNameText" destination="T1b-4R-x9G" id="otT-xA-7jR"/>
+                        <outlet property="websiteText" destination="OOw-Ro-WkE" id="kLj-S3-1m6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ukm-6y-HYj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -192,11 +220,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="city" width="106" height="46"/>
+        <image name="background" width="100" height="56"/>
         <image name="icons8-building-100" width="33" height="33"/>
         <image name="icons8-flag-2-100" width="33" height="33"/>
         <image name="icons8-globe-100" width="33" height="33"/>
+        <image name="icons8-info-100" width="33" height="33"/>
         <image name="icons8-menu-100" width="33" height="33"/>
+        <image name="icons8-star-white-100" width="33" height="33"/>
         <image name="icons8-target-96" width="32" height="32"/>
         <image name="icons8-маркер-на-карте" width="33" height="33"/>
     </resources>

@@ -14,6 +14,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     fileprivate let locationManager = LocationManager()
     
+    var placeManager: DataManagerProtocol!
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
     fileprivate var minimumLatitude: Double = 0.0;
     fileprivate var maximumLatitude: Double = 0.0;
     fileprivate var minimumLongitude: Double = 0.0;
@@ -31,20 +34,52 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     //Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("viewDidLoad")
+        
+        // load core data place manager
+        self.placeManager = CoreDataManager(context: context)
+        
+        //register notification observer
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: AppDelegate.mySpecialNotificationKey), object: nil, queue: nil, using: catchNotification)
+        
         mapView.delegate = self
+    }
+    
+    func catchNotification(notification:Notification) -> Void {
+        if let notifPlaceId = notification.userInfo!["placeId"] as? Int64 {
+            let placeId = Int(notifPlaceId)
+            let lat = notification.userInfo!["lat"] as? Double
+            let lon = notification.userInfo!["lon"] as? Double
+            
+            // add place on map if needed
+            let place = Place(id: placeId);
+            if !placeSet.contains(place) {
+                print("place not exist")
+                let fullPlace = placeManager?.getPlace(id: placeId)
+                placeSet.insert(fullPlace!)
+                var update = Array<Place>()
+                update.append(fullPlace!)
+                addPlacesToMap(update)
+            }
+            
+            // scroll map to place
+            let location: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: lat!, longitude: lon!)
+            let span: MKCoordinateSpan = MKCoordinateSpanMake(0.05, 0.05);
+            let region: MKCoordinateRegion = MKCoordinateRegionMake(location, span)
+            mapView.setRegion(region, animated: true)
+        }
+        if let catId = notification.userInfo!["catId"] {
+            //select category
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("viewWillAppear")
 
         locationManager.bindManager(self)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        print("viewWillDisappear")
 
         locationManager.unbindManager()
     }

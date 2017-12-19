@@ -18,26 +18,46 @@ protocol JsonParserProtocol {
 class JsonParser: JsonParserProtocol {
     
     static func parsePlace(_ data: Data) -> Place? {
-        var result: Place?
         var response: JSONDictionary?
         do {
             response = try JSONSerialization.jsonObject(with: data, options: []) as? JSONDictionary
         } catch let parseError as NSError {
             print("JSONSerialization error: \(parseError.localizedDescription)\n")
-            return result
+            return nil
         }
         
         guard let venueJson = response!["venue"] as? JSONDictionary else {
             print("Dictionary does not contain venues key\n")
-            return result
+            return nil
         }
         let id = venueJson["id"] as? Int
         let name = venueJson["name"] as? String
         let cat = venueJson["category"] as? String
+        let desc = venueJson["description"] as? String
         let lat = venueJson["lat"] as? Double
         let lon = venueJson["lon"] as? Double
-        result = Place(id: id!, placeName: name!, categoryName: cat!, lat: lat!, lon: lon!)
-        return result
+        
+        let website = venueJson["website"] as? String
+        let country = venueJson["country"] as? String
+        
+        var address = String()
+        if let street = venueJson["street"] as? String {
+            address += street
+        }
+        if let houseno = venueJson["houseno"] as? String {
+            address += " \(houseno)"
+        }
+        if let postcode = venueJson["postcode"] as? String {
+            address += ", \(postcode)"
+        }
+        
+        let place = Place(id: id!, placeName: name!, categoryName: cat!, lat: lat!, lon: lon!)
+        place.desc = desc
+        place.website = website
+        place.address = address
+        place.country = country
+        
+        return place
     }
     
     static func parcePlaces(_ data: Data) -> Array<Place> {

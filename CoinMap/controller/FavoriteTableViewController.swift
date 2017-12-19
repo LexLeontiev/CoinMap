@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 class FavoriteTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
-    
+        
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var placeManager: DataManagerProtocol!
     fileprivate var fetchedController: NSFetchedResultsController<CorePlace>?
@@ -49,6 +49,22 @@ class FavoriteTableViewController: UITableViewController, NSFetchedResultsContro
             cell.descriptionLabel.text = place.desc
         }
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let coreplace = fetchedController?.object(at: indexPath);
+        guard (coreplace?.placeId)! > 0 else {
+            return
+        }
+        self.tabBarController?.selectedIndex = 0;
+        NotificationCenter.default.post(
+            name: Notification.Name(rawValue: AppDelegate.mySpecialNotificationKey),
+            object: self,
+            userInfo: [
+                "placeId": coreplace?.placeId,
+                "lat": coreplace?.lat,
+                "lon": coreplace?.lon
+            ])
     }
     
     // Override to support conditional editing of the table view.
@@ -117,26 +133,5 @@ class FavoriteTableViewController: UITableViewController, NSFetchedResultsContro
                 tableView?.insertRows(at: [newIndexPath], with: .fade)
             }
         }
-    }
-    
-    @IBAction func addPlace(_ sender: Any) {
-        let alert = UIAlertController(title: "New place",message: "Add a new place", preferredStyle: .alert)
-        let saveAction = UIAlertAction(title: "Save place",style: .default) {
-                                        [unowned self] action in
-                                        guard let textField = alert.textFields?.first,
-                                            let nameToSave = textField.text else {
-                                                return
-                                        }
-                                        let generatedPlace : Place = TestData.createRandomPlace()
-                                        let newPlace = Place(id: generatedPlace.id, placeName: nameToSave, categoryName: generatedPlace.categoryName, desc: generatedPlace.desc)
-                                        self.placeManager.savePlace(place: newPlace)
-        }
-        let cancelAction = UIAlertAction(title: "Cancel",style: .default)
-        
-        alert.addTextField()
-        alert.addAction(saveAction)
-        alert.addAction(cancelAction)
-        
-        present(alert, animated: true)
     }
 }

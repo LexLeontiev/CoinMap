@@ -13,4 +13,5 @@ protocol DataManagerProtocol {
     func savePlace(place: Place)
     func removePlace(id: Int)
     func getPlace(id: Int) -> Place?
+    func checkPlace(id: Int) -> Bool
 }

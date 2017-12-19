@@ -24,6 +24,11 @@ public class CoreDataManager: DataManagerProtocol {
         corePlace.placeName = place.placeName
         corePlace.categoryName = place.categoryName
         corePlace.desc = place.desc
+        corePlace.lat = place.lat
+        corePlace.lon = place.lon
+        corePlace.address = place.address
+        corePlace.website = place.website
+        corePlace.country = place.country
         try! context.save()
     }
     
@@ -40,6 +45,12 @@ public class CoreDataManager: DataManagerProtocol {
             return nil
         }
         return Place(corePlace: corePlace)
+    }
+    
+    func checkPlace(id: Int) -> Bool {
+        let request = NSFetchRequest<CorePlace>(entityName: "CorePlace")
+        request.predicate = NSPredicate(format: "placeId == %d", id)
+        return !(try! context.fetch(request).isEmpty)
     }
     
     fileprivate func fetchBy(id: Int) -> CorePlace? {

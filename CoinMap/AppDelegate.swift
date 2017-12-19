@@ -11,6 +11,8 @@ import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    static let mySpecialNotificationKey = "com.example.CoinMap.TabViewController"
 
     var window: UIWindow?
 
