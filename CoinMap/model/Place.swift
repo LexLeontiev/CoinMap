@@ -8,7 +8,12 @@
 
 import UIKit
 
-class Place {
+class Place: Hashable {
+
+    var hashValue: Int {
+        return id.hashValue
+    }
+    
     
     let id: Int
     let placeName: String
@@ -43,5 +48,9 @@ class Place {
         self.desc = corePlace.desc ?? ""
         self.lat = 0.0
         self.lon = 0.0
+    }
+    
+    static func ==(lhs: Place, rhs: Place) -> Bool {
+        return lhs.id == rhs.id
     }
 }

@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="N3u-gZ-JJf">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="mutedStandard" translatesAutoresizingMaskIntoConstraints="NO" id="N3u-gZ-JJf">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </mapView>
                         </subviews>
@@ -31,6 +32,12 @@
                         <viewLayoutGuide key="safeArea" id="Skw-fd-kbT"/>
                     </view>
                     <navigationItem key="navigationItem" title="Map" id="GOk-yp-Ten">
+                        <barButtonItem key="leftBarButtonItem" enabled="NO" title="Item" springLoaded="YES" style="plain" id="j9M-xp-DRp">
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="Gkv-k9-rls" kind="presentation" identifier="detailPlacePopupSegue" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="RIY-W7-c04"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="icons8-target-96" id="ciw-ou-HWL">
                             <connections>
                                 <action selector="goToCurrentLocation:" destination="g0M-V8-GNp" id="CPM-sx-PU7"/>
@@ -44,6 +51,106 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QNg-eQ-aKF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="314" y="-286"/>
+        </scene>
+        <!--Place View Controller-->
+        <scene sceneID="tv9-LS-v1M">
+            <objects>
+                <viewController modalPresentationStyle="overCurrentContext" id="Gkv-k9-rls" customClass="PlaceViewController" customModule="CoinMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <visualEffectView key="view" opaque="NO" contentMode="scaleToFill" id="Tyi-6n-Fvf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="d6l-2q-Gj6">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z1t-ab-UlQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <connections>
+                                        <action selector="dismissPopup:" destination="Gkv-k9-rls" eventType="touchUpInside" id="FyN-uH-dO6"/>
+                                    </connections>
+                                </button>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ijZ-WO-A6f">
+                                    <rect key="frame" x="0.0" y="267" width="375" height="400"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="city" translatesAutoresizingMaskIntoConstraints="NO" id="INs-an-0zF">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="130" id="vFi-3v-Otb"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Place number 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T1b-4R-x9G">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EXi-Mc-PCe">
+                                            <rect key="frame" x="8" y="136" width="24" height="24"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kgu-yX-BOe">
+                                            <rect key="frame" x="40" y="136" width="327" height="24"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qCG-MV-gOH">
+                                            <rect key="frame" x="8" y="168" width="24" height="24"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9og-sZ-5NJ">
+                                            <rect key="frame" x="40" y="168" width="327" height="24"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lrM-QZ-rLF">
+                                            <rect key="frame" x="8" y="200" width="24" height="24"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HgA-cZ-4uu">
+                                            <rect key="frame" x="40" y="200" width="327" height="24"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="400" id="4KV-RJ-O4m"/>
+                                        <constraint firstItem="INs-an-0zF" firstAttribute="leading" secondItem="ijZ-WO-A6f" secondAttribute="leading" id="DlO-Qt-GBV"/>
+                                        <constraint firstItem="INs-an-0zF" firstAttribute="top" secondItem="ijZ-WO-A6f" secondAttribute="top" id="bRf-1p-jz5"/>
+                                        <constraint firstAttribute="trailing" secondItem="INs-an-0zF" secondAttribute="trailing" id="cf1-Bf-mfD"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="ijZ-WO-A6f" secondAttribute="bottom" id="OXl-kM-zgC"/>
+                                <constraint firstAttribute="trailing" secondItem="ijZ-WO-A6f" secondAttribute="trailing" id="Rnm-s3-Guw"/>
+                                <constraint firstItem="ijZ-WO-A6f" firstAttribute="leading" secondItem="d6l-2q-Gj6" secondAttribute="leading" id="qVT-Ut-FAe"/>
+                            </constraints>
+                        </view>
+                        <blurEffect style="light"/>
+                    </visualEffectView>
+                    <connections>
+                        <outlet property="addressIcon" destination="qCG-MV-gOH" id="erp-JD-P0T"/>
+                        <outlet property="addressText" destination="9og-sZ-5NJ" id="Kzf-Pr-gb2"/>
+                        <outlet property="catIcon" destination="EXi-Mc-PCe" id="Ys0-Un-Mn4"/>
+                        <outlet property="catText" destination="Kgu-yX-BOe" id="SJ4-sF-h3m"/>
+                        <outlet property="descIcon" destination="lrM-QZ-rLF" id="qwc-6w-8wh"/>
+                        <outlet property="descText" destination="HgA-cZ-4uu" id="XcW-3c-PHt"/>
+                        <outlet property="placeNameText" destination="T1b-4R-x9G" id="otT-xA-7jR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ukm-6y-HYj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1192.8" y="-287.40629685157421"/>
         </scene>
         <!--Map-->
         <scene sceneID="ZHy-q9-iGZ">
@@ -68,6 +175,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="city" width="106" height="46"/>
         <image name="icons8-target-96" width="32" height="32"/>
         <image name="icons8-маркер-на-карте" width="33" height="33"/>
     </resources>

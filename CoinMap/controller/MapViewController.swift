@@ -12,35 +12,46 @@ import CoreLocation
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
-    typealias JSONDictionary = [String: Any]
-    let locationManager = LocationManager()
+    fileprivate let locationManager = LocationManager()
     
-    var places: Array<Place> = Array()
-    let defaultSession = URLSession(configuration: .default)
-    var dataTask: URLSessionDataTask?
+    fileprivate var minimumLatitude: Double = 0.0;
+    fileprivate var maximumLatitude: Double = 0.0;
+    fileprivate var minimumLongitude: Double = 0.0;
+    fileprivate var maximumLongitude: Double = 0.0;
+    
+    fileprivate let placesLimit = 100;
+
+    fileprivate var selectedPlaceId: Int?
+    fileprivate var placeSet = Set<Place>()
+    fileprivate let defaultSession = URLSession(configuration: .default)
+    fileprivate var dataTask: URLSessionDataTask?
     
     @IBOutlet weak var mapView: MKMapView!
     
+    //Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("viewDidLoad")
         mapView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print("viewWillAppear")
+
         locationManager.bindManager(self)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        print("viewWillDisappear")
+
         locationManager.unbindManager()
     }
     
-    
+    //Location callbacks
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         locationManager.stopListeningLocationChanges()
-        print("update location")
         let location: CLLocationCoordinate2D = locationManager.getLastUpdatedLocation(locations)
         let span: MKCoordinateSpan = MKCoordinateSpanMake(0.1, 0.1);
         let region: MKCoordinateRegion = MKCoordinateRegionMake(location, span)
@@ -49,7 +60,39 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.showsUserLocation = true
     }
     
-    func checkPlacesInThatRegion(region: MKCoordinateRegion) {
+    //MapView callbacks
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        checkPlacesInThatRegion(region: mapView.region)
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView)
+    {
+        guard let annotation = view.annotation as? PlacePointAnnotation else {
+            print("The annotation is not an instance of PlacePointAnnotation.")
+            return
+        }
+        self.selectedPlaceId = annotation.placeId
+        showDetailPlacePopup()
+    }
+    
+    //Segue callbacks
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detailPlacePopupSegue" {
+            guard let vc = segue.destination as? PlaceViewController else {
+                print("The destination view controller is not an instance of PlaceViewController.")
+                return
+            }
+            vc.placeId = self.selectedPlaceId
+        }
+    }
+    
+    //Actions
+    @IBAction func goToCurrentLocation(_ sender: Any) {
+        locationManager.startListeningLocationChanges()
+    }
+    
+    //Methods
+    fileprivate func checkPlacesInThatRegion(region: MKCoordinateRegion) {
         let span: MKCoordinateSpan = region.span
         let center: CLLocationCoordinate2D = region.center
         
@@ -58,22 +101,23 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let minimumLongitude = center.longitude - span.longitudeDelta * 0.5
         let maximumLongitude = center.longitude + span.longitudeDelta * 0.5
         
-        print("minimumLatitude = \(minimumLatitude)")
-        print("maximumLatitude = \(maximumLatitude)")
-        print("minimumLongitude = \(minimumLongitude)")
-        print("maximumLongitude = \(maximumLongitude)")
-
+        guard minimumLatitude < self.minimumLatitude
+            || maximumLatitude > self.maximumLatitude
+            || minimumLongitude < self.minimumLongitude
+            || maximumLongitude > self.maximumLongitude else {
+                return
+        }
         
         loadPlacesInRegion(minimumLatitude: minimumLatitude, maximumLatitude: maximumLatitude,
                            minimumLongitude: minimumLongitude, maximumLongitude: maximumLongitude)
     }
     
-    func loadPlacesInRegion(minimumLatitude lat1: Double, maximumLatitude lat2: Double,
+    fileprivate func loadPlacesInRegion(minimumLatitude lat1: Double, maximumLatitude lat2: Double,
                             minimumLongitude lon1: Double, maximumLongitude lon2: Double) {
+        print("loadPlacesInRegion")
         dataTask?.cancel()
-        places.removeAll()
         if var urlComponents = URLComponents(string: "https://coinmap.org/api/v1/venues/") {
-            urlComponents.query = "limit=10&lat1=\(lat1)&lat2=\(lat2)&lon1=\(lon1)&lon2=\(lon2)"
+            urlComponents.query = "limit=\(self.placesLimit)&lat1=\(lat1)&lat2=\(lat2)&lon1=\(lon1)&lon2=\(lon2)"
             guard let url = urlComponents.url else { return }
             dataTask = defaultSession.dataTask(with: url) { data, response, error in
                 defer { self.dataTask = nil }
@@ -83,7 +127,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     let response = response as? HTTPURLResponse,
                     response.statusCode == 200 {
                     DispatchQueue.main.async {
-                        self.deliverResult(data: data)
+                        self.minimumLatitude = lat1
+                        self.maximumLatitude = lat2
+                        self.minimumLongitude = lon1
+                        self.maximumLongitude = lon2
+                        self.deliverPlacesResult(data: data)
                     }
                 }
             }
@@ -91,56 +139,30 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
-    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        print("regionDidChange")
-        checkPlacesInThatRegion(region: mapView.region)
-    }
-    
-    func deliverResult(data: Data) {
-        parsePlaces(data: data)
-    }
-    
-    func parsePlaces(data: Data) {
-        var response: JSONDictionary?
-        do {
-            response = try JSONSerialization.jsonObject(with: data, options: []) as? JSONDictionary
-        } catch let parseError as NSError {
-            print("JSONSerialization error: \(parseError.localizedDescription)\n")
-            return
-        }
-        
-        guard let array = response!["venues"] as? [Any] else {
-            print("Dictionary does not contain venues key\n")
-            return
-        }
-        var index = 0
-        for trackDictionary in array {
-            if let trackDictionary = trackDictionary as? JSONDictionary {
-                let id = trackDictionary["id"] as? Int
-                let name = trackDictionary["name"] as? String
-                let cat = trackDictionary["category"] as? String
-                let lat = trackDictionary["lat"] as? Double
-                let lon = trackDictionary["lon"] as? Double
-                places.append(Place(id: id!, placeName: name!, categoryName: cat!, lat: lat!, lon: lon!))
-                index += 1
-            } else {
-                print("Problem parsing venues\n")
+    fileprivate func deliverPlacesResult(data: Data) {
+        let places = JsonParser.parcePlaces(data)
+        var update = Array<Place>()
+        for place in places {
+            if !placeSet.contains(place) {
+                placeSet.insert(place)
+                update.append(place)
             }
         }
-        addPlacesToMap()
+        addPlacesToMap(update)
     }
     
-    @IBAction func goToCurrentLocation(_ sender: Any) {
-        locationManager.startListeningLocationChanges()
+    fileprivate func showDetailPlacePopup() {
+        self.performSegue(withIdentifier: "detailPlacePopupSegue", sender: self)
     }
     
-    func addPlacesToMap() {
+    fileprivate func addPlacesToMap(_ places: Array<Place>) {
         var placeAnnotations = Array<MKPointAnnotation>()
         for place in places {
             let sourceLocation = CLLocationCoordinate2D(latitude: place.lat, longitude: place.lon)
             let sourcePlacemark = MKPlacemark(coordinate: sourceLocation, addressDictionary: nil)
-            let sourceAnnotation = MKPointAnnotation()
+            let sourceAnnotation = PlacePointAnnotation()
             sourceAnnotation.title = place.placeName
+            sourceAnnotation.placeId = place.id
             if let location = sourcePlacemark.location {
                 sourceAnnotation.coordinate = location.coordinate
             }
@@ -148,12 +170,4 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         self.mapView.addAnnotations(placeAnnotations)
     }
-
-    func showCentredMap() {
-        let sourceLocation = CLLocationCoordinate2D(latitude: 55.752559, longitude: 37.617421)
-        let viewRegion = MKCoordinateRegionMakeWithDistance(sourceLocation, 8000, 8000)
-        let adjustedRegion = self.mapView.regionThatFits(viewRegion)
-        self.mapView.setRegion(adjustedRegion, animated: true)
-    }
 }
-
