@@ -14,13 +14,14 @@ class Place: Hashable {
         return id.hashValue
     }
     
-    
     let id: Int
     let placeName: String
     let categoryName: String?
     let desc: String?
     let lat: Double
     let lon: Double
+    
+
     
     // constructor for places with coodinats and without description
     init(id: Int, placeName: String, categoryName: String?, lat: Double, lon: Double) {
