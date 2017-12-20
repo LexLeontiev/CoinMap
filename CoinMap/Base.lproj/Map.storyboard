@@ -71,15 +71,8 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z1t-ab-UlQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <connections>
-                                        <action selector="dismissPopup:" destination="Gkv-k9-rls" eventType="touchUpInside" id="FyN-uH-dO6"/>
-                                    </connections>
-                                </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ijZ-WO-A6f">
-                                    <rect key="frame" x="0.0" y="267" width="375" height="400"/>
+                                    <rect key="frame" x="0.0" y="217" width="375" height="450"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="INs-an-0zF">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
@@ -146,7 +139,7 @@
                                             <rect key="frame" x="16" y="306" width="24" height="24"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" - " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HxQ-4w-33s">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" - " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HxQ-4w-33s">
                                             <rect key="frame" x="54" y="306" width="313" height="24"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -167,11 +160,15 @@
                                                 <action selector="setIsFavorite:" destination="Gkv-k9-rls" eventType="touchUpInside" id="ySB-le-VEV"/>
                                             </connections>
                                         </button>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Onk-3v-iOf">
+                                            <rect key="frame" x="177" y="215" width="20" height="20"/>
+                                        </activityIndicatorView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="400" id="4KV-RJ-O4m"/>
+                                        <constraint firstAttribute="height" constant="450" id="4KV-RJ-O4m"/>
+                                        <constraint firstItem="Onk-3v-iOf" firstAttribute="centerX" secondItem="ijZ-WO-A6f" secondAttribute="centerX" id="79C-tN-UtQ"/>
                                         <constraint firstItem="EXi-Mc-PCe" firstAttribute="top" secondItem="INs-an-0zF" secondAttribute="bottom" constant="16" id="98p-ck-m86"/>
                                         <constraint firstItem="INs-an-0zF" firstAttribute="leading" secondItem="ijZ-WO-A6f" secondAttribute="leading" id="DlO-Qt-GBV"/>
                                         <constraint firstItem="EXi-Mc-PCe" firstAttribute="leading" secondItem="ijZ-WO-A6f" secondAttribute="leading" constant="16" id="FbQ-Wo-Iam"/>
@@ -179,8 +176,16 @@
                                         <constraint firstAttribute="trailing" secondItem="INs-an-0zF" secondAttribute="trailing" id="cf1-Bf-mfD"/>
                                         <constraint firstAttribute="trailing" secondItem="rMz-NS-l9R" secondAttribute="trailing" constant="8" id="gKe-Hw-xzS"/>
                                         <constraint firstItem="rMz-NS-l9R" firstAttribute="top" secondItem="ijZ-WO-A6f" secondAttribute="top" constant="8" id="ush-Fa-NDG"/>
+                                        <constraint firstItem="Onk-3v-iOf" firstAttribute="centerY" secondItem="ijZ-WO-A6f" secondAttribute="centerY" id="zpA-Wq-asP"/>
                                     </constraints>
                                 </view>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z1t-ab-UlQ">
+                                    <rect key="frame" x="-89" y="0.0" width="375" height="667"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <connections>
+                                        <action selector="dismissPopup:" destination="Gkv-k9-rls" eventType="touchUpInside" id="FyN-uH-dO6"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="ijZ-WO-A6f" secondAttribute="bottom" id="OXl-kM-zgC"/>
@@ -192,12 +197,18 @@
                     </visualEffectView>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="addressIcon" destination="qCG-MV-gOH" id="t9a-KP-hiU"/>
                         <outlet property="addressText" destination="9og-sZ-5NJ" id="Kzf-Pr-gb2"/>
+                        <outlet property="catIcon" destination="EXi-Mc-PCe" id="S06-V3-cy3"/>
                         <outlet property="catText" destination="Kgu-yX-BOe" id="SJ4-sF-h3m"/>
+                        <outlet property="countryIcon" destination="lrM-QZ-rLF" id="bK3-PO-tCn"/>
                         <outlet property="countryText" destination="HgA-cZ-4uu" id="XFq-aK-9OA"/>
+                        <outlet property="descIcon" destination="jiy-VU-cP2" id="uPR-XP-KMY"/>
                         <outlet property="descText" destination="HxQ-4w-33s" id="9nr-Ro-Qvt"/>
                         <outlet property="favoriteBtn" destination="rMz-NS-l9R" id="cDZ-o0-bB8"/>
                         <outlet property="placeNameText" destination="T1b-4R-x9G" id="otT-xA-7jR"/>
+                        <outlet property="progressBar" destination="Onk-3v-iOf" id="3kV-uF-5mH"/>
+                        <outlet property="websiteIcon" destination="Vdb-ry-s9g" id="Fid-90-El7"/>
                         <outlet property="websiteText" destination="OOw-Ro-WkE" id="kLj-S3-1m6"/>
                     </connections>
                 </viewController>

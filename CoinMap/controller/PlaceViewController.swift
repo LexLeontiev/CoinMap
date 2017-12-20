@@ -17,6 +17,15 @@ class PlaceViewController: UIViewController {
     @IBOutlet weak var countryText: UILabel!
     @IBOutlet weak var descText: UILabel!
     @IBOutlet weak var favoriteBtn: UIButton!
+    @IBOutlet weak var progressBar: UIActivityIndicatorView!
+    
+    @IBOutlet weak var catIcon: UIImageView!
+    @IBOutlet weak var addressIcon: UIImageView!
+    @IBOutlet weak var countryIcon: UIImageView!
+    @IBOutlet weak var websiteIcon: UIImageView!
+    @IBOutlet weak var descIcon: UIImageView!
+    
+    
     
     var placeManager: DataManagerProtocol!
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -33,6 +42,21 @@ class PlaceViewController: UIViewController {
         
         // load core data place manager
         self.placeManager = CoreDataManager(context: context)
+        
+        progressBar.hidesWhenStopped = true
+        
+        placeNameText.isHidden = true
+        catIcon.isHidden = true
+        catText.isHidden = true
+        addressIcon.isHidden = true
+        addressText.isHidden = true
+        countryIcon.isHidden = true
+        countryText.isHidden = true
+        websiteIcon.isHidden = true
+        websiteText.isHidden = true
+        descIcon.isHidden = true
+        descText.isHidden = true
+        favoriteBtn.isHidden = true
     
         loadPlace(placeId!)
     }
@@ -61,6 +85,21 @@ class PlaceViewController: UIViewController {
     
     //Methods
     fileprivate func bindViews() {
+        
+        placeNameText.isHidden = false
+        catIcon.isHidden = false
+        catText.isHidden = false
+        addressIcon.isHidden = false
+        addressText.isHidden = false
+        countryIcon.isHidden = false
+        countryText.isHidden = false
+        websiteIcon.isHidden = false
+        websiteText.isHidden = false
+        descIcon.isHidden = false
+        descText.isHidden = false
+        favoriteBtn.isHidden = false
+        
+        
         favoriteBtn.isEnabled = true
         if place?.placeName != nil {
             placeNameText.text = place?.placeName
@@ -90,16 +129,21 @@ class PlaceViewController: UIViewController {
     fileprivate func deliverResult(_ data: Data) {
         self.place = JsonParser.parsePlace(data)
         self.place?.isFavorite = self.placeManager.checkPlace(id: (place?.id)!)
+        progressBar.stopAnimating()
     }
     
     fileprivate func loadPlace(_ id: Int) {
         dataTask?.cancel()
+        progressBar.startAnimating()
         if var urlComponents = URLComponents(string: "https://coinmap.org/api/v1/venues/\(id)") {
             guard let url = urlComponents.url else { return }
             dataTask = defaultSession.dataTask(with: url) { data, response, error in
                 defer { self.dataTask = nil }
                 if let error = error {
                     print("DataTask error: " + error.localizedDescription + "\n")
+                    DispatchQueue.main.async {
+                        self.progressBar.stopAnimating()
+                    }
                 } else if let data = data,
                     let response = response as? HTTPURLResponse,
                     response.statusCode == 200 {
