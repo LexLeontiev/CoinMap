@@ -38,4 +38,17 @@ class CategoryCollectionViewController: UICollectionViewController {
         
         return cell
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cat = categories[indexPath.row]
+        if cat != nil {
+            self.tabBarController?.selectedIndex = 0;
+            NotificationCenter.default.post(
+                name: Notification.Name(rawValue: AppDelegate.mySpecialNotificationKey),
+                object: self,
+                userInfo: [
+                    "cat": cat.code
+                ])
+        }
+    }
 }

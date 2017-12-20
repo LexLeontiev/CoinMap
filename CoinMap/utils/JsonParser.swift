@@ -75,6 +75,7 @@ class JsonParser: JsonParserProtocol {
             return result
         }
         var index = 0
+        print("arraySize = \(array.count)")
         for trackDictionary in array {
             if let trackDictionary = trackDictionary as? JSONDictionary {
                 let id = trackDictionary["id"] as? Int

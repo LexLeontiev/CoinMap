@@ -12,5 +12,6 @@ import MapKit
 class PlacePointAnnotation: MKPointAnnotation {
     
     var placeId: Int!
+    var placeCategory: String!
     var pinCustomImageName: String!
 }

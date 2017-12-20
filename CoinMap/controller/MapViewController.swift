@@ -29,6 +29,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     fileprivate let defaultSession = URLSession(configuration: .default)
     fileprivate var dataTask: URLSessionDataTask?
     
+    fileprivate var catFilter: String = ""
+    
     @IBOutlet weak var mapView: MKMapView!
     
     //Lifecycle
@@ -67,8 +69,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             let region: MKCoordinateRegion = MKCoordinateRegionMake(location, span)
             mapView.setRegion(region, animated: true)
         }
-        if let catId = notification.userInfo!["catId"] {
+        if let cat = notification.userInfo!["cat"] {
             //select category
+            catFilter = (cat as? String)!
+            updateMapWithCategory(catFilter)
+            checkPlacesInThatRegion(region: mapView.region)
         }
     }
     
@@ -126,6 +131,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager.startListeningLocationChanges()
     }
     
+    @IBAction func clearFilter(_ sender: Any) {
+        catFilter = ""
+        updateMapWithCategory(catFilter)
+        checkPlacesInThatRegion(region: mapView.region)
+    }
+    
     //Methods
     fileprivate func checkPlacesInThatRegion(region: MKCoordinateRegion) {
         let span: MKCoordinateSpan = region.span
@@ -136,12 +147,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let minimumLongitude = center.longitude - span.longitudeDelta * 0.5
         let maximumLongitude = center.longitude + span.longitudeDelta * 0.5
         
-        guard minimumLatitude < self.minimumLatitude
-            || maximumLatitude > self.maximumLatitude
-            || minimumLongitude < self.minimumLongitude
-            || maximumLongitude > self.maximumLongitude else {
-                return
-        }
+//        updateMapWithCategory(catFilter)
+        
+//        guard minimumLatitude < self.minimumLatitude
+//            || maximumLatitude > self.maximumLatitude
+//            || minimumLongitude < self.minimumLongitude
+//            || maximumLongitude > self.maximumLongitude else {
+//                return
+//        }
         
         loadPlacesInRegion(minimumLatitude: minimumLatitude, maximumLatitude: maximumLatitude,
                            minimumLongitude: minimumLongitude, maximumLongitude: maximumLongitude)
@@ -152,7 +165,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         print("loadPlacesInRegion")
         dataTask?.cancel()
         if var urlComponents = URLComponents(string: "https://coinmap.org/api/v1/venues/") {
-            urlComponents.query = "limit=\(self.placesLimit)&lat1=\(lat1)&lat2=\(lat2)&lon1=\(lon1)&lon2=\(lon2)"
+            var query = "limit=\(self.placesLimit)&lat1=\(lat1)&lat2=\(lat2)&lon1=\(lon1)&lon2=\(lon2)"
+            print("catFilter = \(catFilter)")
+            if (catFilter != "") {
+                query += "&category=\(catFilter)"
+            }
+            urlComponents.query = query;
             guard let url = urlComponents.url else { return }
             dataTask = defaultSession.dataTask(with: url) { data, response, error in
                 defer { self.dataTask = nil }
@@ -186,6 +204,30 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         addPlacesToMap(update)
     }
     
+    fileprivate func updateMapWithCategory(_ category: String) {
+        let annotations = self.mapView.annotations
+        var annotationsForRemove = Array<MKPointAnnotation>()
+        for annotation in annotations {
+//            if category == "" {
+//                mapView.view(for: annotation)?.isHidden = false
+//            }
+//            if let placePointAnnotation = annotation as? PlacePointAnnotation {
+//                if placePointAnnotation.placeCategory != category {
+//                     mapView.view(for: annotation)?.isHidden = true
+//                } else {
+//                     mapView.view(for: annotation)?.isHidden = false
+//                }
+//            }
+            if let placePointAnnotation = annotation as? PlacePointAnnotation {
+                if placePointAnnotation.placeCategory != category {
+                    annotationsForRemove.append(placePointAnnotation)
+                    placeSet.remove(Place(id: placePointAnnotation.placeId))
+                }
+            }
+        }
+        mapView.removeAnnotations(annotationsForRemove)
+    }
+    
     fileprivate func showDetailPlacePopup() {
         self.performSegue(withIdentifier: "detailPlacePopupSegue", sender: self)
     }
@@ -198,6 +240,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             let sourceAnnotation = PlacePointAnnotation()
             sourceAnnotation.title = place.placeName
             sourceAnnotation.placeId = place.id
+            sourceAnnotation.placeCategory = place.categoryName
             if let location = sourcePlacemark.location {
                 sourceAnnotation.coordinate = location.coordinate
             }

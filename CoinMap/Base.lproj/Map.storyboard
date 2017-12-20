@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -32,15 +33,22 @@
                         <viewLayoutGuide key="safeArea" id="Skw-fd-kbT"/>
                     </view>
                     <navigationItem key="navigationItem" title="Map" id="GOk-yp-Ten">
-                        <barButtonItem key="leftBarButtonItem" enabled="NO" title="Item" springLoaded="YES" style="plain" id="j9M-xp-DRp">
-                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <leftBarButtonItems>
+                            <barButtonItem title="Clear filter" id="QOk-FB-P7P">
+                                <connections>
+                                    <action selector="clearFilter:" destination="g0M-V8-GNp" id="qI1-TW-kcG"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem enabled="NO" title="Item" springLoaded="YES" style="plain" id="j9M-xp-DRp">
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="Gkv-k9-rls" kind="presentation" identifier="detailPlacePopupSegue" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="RIY-W7-c04"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" title="Find me" id="E8U-NS-TTb">
                             <connections>
-                                <segue destination="Gkv-k9-rls" kind="presentation" identifier="detailPlacePopupSegue" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="RIY-W7-c04"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="icons8-target-96" id="ciw-ou-HWL">
-                            <connections>
-                                <action selector="goToCurrentLocation:" destination="g0M-V8-GNp" id="CPM-sx-PU7"/>
+                                <action selector="goToCurrentLocation:" destination="g0M-V8-GNp" id="Ku9-6q-XOv"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -227,7 +235,6 @@
         <image name="icons8-info-100" width="33" height="33"/>
         <image name="icons8-menu-100" width="33" height="33"/>
         <image name="icons8-star-white-100" width="33" height="33"/>
-        <image name="icons8-target-96" width="32" height="32"/>
         <image name="icons8-маркер-на-карте" width="33" height="33"/>
     </resources>
 </document>
